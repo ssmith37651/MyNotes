@@ -14,6 +14,7 @@
 		69A11C00238430AB0042A501 /* MyNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 69A11BFE238430AB0042A501 /* MyNotes.xcdatamodeld */; };
 		69A11C02238430AC0042A501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69A11C01238430AC0042A501 /* Assets.xcassets */; };
 		69A11C05238430AC0042A501 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69A11C03238430AC0042A501 /* LaunchScreen.storyboard */; };
+		69A11C0D238432170042A501 /* MyNotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A11C0C238432170042A501 /* MyNotesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		69A11C01238430AC0042A501 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		69A11C04238430AC0042A501 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		69A11C06238430AC0042A501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69A11C0C238432170042A501 /* MyNotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNotesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				69A11C03238430AC0042A501 /* LaunchScreen.storyboard */,
 				69A11C06238430AC0042A501 /* Info.plist */,
 				69A11BFE238430AB0042A501 /* MyNotes.xcdatamodeld */,
+				69A11C0C238432170042A501 /* MyNotesTableViewController.swift */,
 			);
 			path = MyNotes;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69A11C0D238432170042A501 /* MyNotesTableViewController.swift in Sources */,
 				69A11BFA238430AB0042A501 /* ViewController.swift in Sources */,
 				69A11BF6238430AB0042A501 /* AppDelegate.swift in Sources */,
 				69A11BF8238430AB0042A501 /* SceneDelegate.swift in Sources */,
@@ -298,7 +302,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stephen.MyNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -316,7 +320,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stephen.MyNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
