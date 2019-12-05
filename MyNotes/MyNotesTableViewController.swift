@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 class MyNotesTableViewController: UITableViewController {
     
@@ -54,6 +55,41 @@ class MyNotesTableViewController: UITableViewController {
         
         // reload the data in the Table View controller
         tableView.reloadData()
+    }
+    
+    func deleteNotes(item: Note){
+        
+        context.delete(item)
+        
+        do{
+            // use context to delete Notes into CoreData
+            try context.save()
+        } catch {
+            print("Error deleting Notes from CoreData!")
+        }
+        
+        loadNotes()
+    }
+    
+    func allNotesDeletedNotification () {
+        var deleted = true
+        
+        if notes.count == 0{
+            deleted = false
+        }
+        
+        if deleted == true{
+            let content = UNMutableNotificationContent()
+            content.title = "MyNotes"
+            content.body = "All Notes Deleted"
+            content.sound = UNNotificationSound.default
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: "noteIdentifier", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        }
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -164,6 +200,44 @@ class MyNotesTableViewController: UITableViewController {
 
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        _ = tableView.dequeueReusableCell(withIdentifier: "MyNotesCell", for: indexPath)
+        
+        var dateTextField = UITextField()
+        
+        let alert = UIAlertController(title: "\(notes[indexPath.row].title!)", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Change", style: .default, handler: { (action) in
+            
+            let note = self.notes[indexPath.row]
+            
+            note.date = dateTextField.text
+            
+            self.saveNotes()
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler:
+            {(cancelAction) in
+        })
+        
+        alert.addAction(action)
+        alert.addAction(cancelAction)
+        
+        alert.addTextField(configurationHandler: { (field) in
+            dateTextField = field
+            dateTextField.text = self.notes[indexPath.row].date
+            
+        })
+        
+        present(alert, animated: true, completion: nil)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -173,17 +247,17 @@ class MyNotesTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            let item = notes[indexPath.row]
+            deleteNotes(item: item)
+            
+            allNotesDeletedNotification()
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -210,4 +284,5 @@ class MyNotesTableViewController: UITableViewController {
     }
     */
 
+}
 }
